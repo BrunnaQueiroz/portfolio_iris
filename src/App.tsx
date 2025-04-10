@@ -10,43 +10,38 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination, A11y } from 'swiper/modules';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const portfolioItems = [
     {
-      image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0',
-      title: 'Campanha Digital',
+      images: ['/capa-valentine.jpg', '/perfil-valentine.jpg'],
+      title: 'Vallenttine Modas',
       description:
         'Estratégia completa de mídia social com aumento de 150% no engajamento.',
     },
     {
-      image: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167',
-      title: 'Produção de Conteúdo',
+      images: ['capa-seleta.jpg', 'perfil-seleta.jpg'],
+      title: 'Seleta Delicatessen',
       description:
         'Série de vídeos para lançamento de produto com mais de 1M de visualizações.',
     },
     {
-      image: 'https://images.unsplash.com/photo-1567521464027-f127ff144326',
-      title: 'Gestão de Redes',
+      images: ['capa-jack.jpg', 'perfil-jack.jpg'],
+      title: 'Jackpoint Pizzaria',
       description: 'Aumento de 200% em seguidores orgânicos em 3 meses.',
     },
     {
-      image: 'https://images.unsplash.com/photo-1552581234-26160f608093',
-      title: 'Marketing de Influência',
+      images: ['capa-salao.jpg'],
+      title: 'Studio de beleza',
       description: 'Campanha com micro-influenciadores gerando 300% de ROI.',
     },
     {
-      image: 'https://images.unsplash.com/photo-1542744094-24638eff58bb',
-      title: 'Estratégia Digital',
+      images: ['capa-nossoEngenho.jpg'],
+      title: 'Nosso engenho',
       description: 'Planejamento estratégico resultando em 400% mais leads.',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1553028826-f4804a6dba3b',
-      title: 'Produção Audiovisual',
-      description: 'Série de vídeos institucionais com alto engajamento.',
     },
   ];
 
@@ -337,16 +332,52 @@ function App() {
                 slidesPerView: 3,
               },
             }}
-            className="pb-12"
+            // className="pb-12"
           >
             {portfolioItems.map((item, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-48 object-cover"
-                  />
+                <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow ">
+                  <Swiper
+                    modules={[Autoplay, Pagination]}
+                    spaceBetween={10}
+                    slidesPerView={1}
+                    autoplay={{
+                      delay: 3000,
+                      disableOnInteraction: true,
+                    }}
+                    pagination={{
+                      clickable: true,
+                      renderBullet: (index, className) => `
+                        <div class="${className}" style="width:40px;height:40px;background-image:url(${item.images[index]});background-size:cover;   background-position: center; border-radius:4px; opacity: 0.5; 
+                          "></div>
+                        `,
+                    }}
+                    // className="h-48"
+                    style={{
+                      height: '460px',
+
+                      objectFit: 'contain',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {item.images.map((image, idx) => (
+                      <SwiperSlide key={idx}>
+                        <img
+                          src={image}
+                          style={{
+                            objectFit: 'contain',
+                            width: '100%',
+                            maxHeight: '400px',
+
+                            height: '100%',
+                          }}
+                          alt={`${item.title} ${idx + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+
                   <div className="p-6">
                     <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                     <p className="text-gray-600">{item.description}</p>
