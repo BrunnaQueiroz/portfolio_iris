@@ -1,5 +1,13 @@
 import React from 'react';
-import { Menu, X, Instagram, Linkedin, Mail, Calendar } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Instagram,
+  Linkedin,
+  Mail,
+  Calendar,
+  MessageCircle,
+} from 'lucide-react';
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
@@ -169,7 +177,8 @@ function App() {
       <section
         className="pt-32 pb-20 px-4 bg-gradient-to-b from-violet-50 to-white"
         style={{
-          backgroundImage: 'url("/bg-iris.jpg")',
+          backgroundImage: 'url("/bg.jpg")',
+          // backgroundImage: 'url("/bg-iris.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -200,7 +209,7 @@ function App() {
                 Social Media & Videomaker mobile
               </span>
             </div>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-black mb-8 max-w-2xl mx-auto">
               Transformando ideias em conteúdo digital impactante para elevar
               sua marca
             </p>
@@ -277,6 +286,7 @@ function App() {
                 <a
                   href="https://instagram.com"
                   target="_blank"
+                  title="Instagram"
                   rel="noopener noreferrer"
                   // className="text-violet-600 hover:text-violet-800"
                   className="text-white hover:text-black"
@@ -284,13 +294,13 @@ function App() {
                   <Instagram size={24} />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://wa.me/5571986101016?text=Ol%C3%A1%2C%20%C3%8Dris!%20Gostaria%20de%20saber%20mais%20sobre%20os%20seus%20servi%C3%A7os."
                   target="_blank"
+                  title="WhatsApp"
                   rel="noopener noreferrer"
-                  // className="text-violet-600 hover:text-violet-800"
                   className="text-white hover:text-black"
                 >
-                  <Linkedin size={24} />
+                  <MessageCircle size={24} />
                 </a>
               </div>
             </div>
