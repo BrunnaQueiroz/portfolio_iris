@@ -20,18 +20,19 @@ function App() {
       images: ['/capa-valentine.jpg', '/perfil-valentine.jpg'],
       title: 'Vallenttine Modas',
       description:
-        'Estratégia completa de mídia social com aumento de 150% no engajamento.',
+        'Desenvolvimento do Instagram do zero, incluindo design, criação de conteúdo e estratégias para atrair e engajar clientes no segmento de moda feminina',
     },
     {
       images: ['capa-seleta.jpg', 'perfil-seleta.jpg'],
       title: 'Seleta Delicatessen',
       description:
-        'Série de vídeos para lançamento de produto com mais de 1M de visualizações.',
+        'Gestão de tráfego pago, design e estratégias para aumentar a conversão e consolidar a marca no nicho de alimentação saudável.',
     },
     {
       images: ['capa-jack.jpg', 'perfil-jack.jpg'],
       title: 'Jackpoint Pizzaria',
-      description: 'Aumento de 200% em seguidores orgânicos em 3 meses.',
+      description:
+        'Criação de conteúdo, design e estratégias para fortalecer a presença digital e impulsionar as vendas no delivery.',
     },
     {
       images: ['capa-salao.jpg'],
@@ -41,7 +42,8 @@ function App() {
     {
       images: ['capa-nossoEngenho.jpg'],
       title: 'Nosso engenho',
-      description: 'Planejamento estratégico resultando em 400% mais leads.',
+      description:
+        'Edição de entrevistas e vídeos para a página e atuação como repórter em cobertura do bloco Jake carnaval',
     },
   ];
 
