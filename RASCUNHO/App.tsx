@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   Menu,
   X,
@@ -15,38 +14,6 @@ import { Autoplay, Navigation, Pagination, A11y } from 'swiper/modules';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // const portfolioItems = [
-  //   {
-  //     images: ['/capa-valentine.jpg', '/perfil-valentine.jpg'],
-  //     title: 'Vallenttine Modas',
-  //     description:
-  //       'Desenvolvimento do Instagram do zero, incluindo design, criação de conteúdo e estratégias para atrair e engajar clientes no segmento de moda feminina',
-  //   },
-  //   {
-  //     images: ['capa-seleta.jpg', 'perfil-seleta.jpg'],
-  //     title: 'Seleta Delicatessen',
-  //     description:
-  //       'Gestão de tráfego pago, design e estratégias para aumentar a conversão e consolidar a marca no nicho de alimentação saudável.',
-  //   },
-  //   {
-  //     images: ['capa-jack.jpg', 'perfil-jack.jpg'],
-  //     title: 'Jackpoint Pizzaria',
-  //     description:
-  //       'Criação de conteúdo, design e estratégias para fortalecer a presença digital e impulsionar as vendas no delivery.',
-  //   },
-  //   {
-  //     images: ['capa-salao.jpg'],
-  //     title: 'Studio de beleza',
-  //     description: 'Campanha com micro-influenciadores gerando 300% de ROI.',
-  //   },
-  //   {
-  //     images: ['capa-nossoEngenho.jpg'],
-  //     title: 'Nosso engenho',
-  //     description:
-  //       'Edição de entrevistas e vídeos para a página e atuação como repórter em cobertura do bloco Jake carnaval',
-  //   },
-  // ];
 
   const portfolioItems = [
     {
@@ -71,32 +38,12 @@ function App() {
       images: ['capa-salao.jpg'],
       title: 'Studio de beleza',
       description: 'Campanha com micro-influenciadores gerando 300% de ROI.',
-      videos: [
-        'https://drive.google.com/file/d/17j75CeFWQCv3ZkG2u592TVuEBlSTTll4/preview',
-        'https://drive.google.com/file/d/16JeYxvJOd8CtlZpu-pzAY7ljKtTY3XXh/preview',
-        'https://drive.google.com/file/d/16NW2ND9vX8BlLUa-ox9lAR38Kco1GYei/preview',
-      ],
-      videoThumbs: [
-        '/thumb-noiva.jpg',
-        '/thumb-massagem.jpg',
-        '/thumb-cilios.jpg',
-      ],
     },
     {
       images: ['capa-nossoEngenho.jpg'],
       title: 'Nosso engenho',
       description:
         'Edição de entrevistas e vídeos para a página e atuação como repórter em cobertura do bloco Jake carnaval',
-      videos: [
-        'https://drive.google.com/file/d/16V94Ce4wbnTWkl_kdtCMnQ2JYuklAnFI/preview',
-        'https://drive.google.com/file/d/16V94Ce4wbnTWkl_kdtCMnQ2JYuklAnFI/preview',
-        'https://drive.google.com/file/d/17lPUwPxzSUXzbutGAT7mUI5xvb-vtRhf/preview',
-      ],
-      videoThumbs: [
-        '/thumb-restaurante.jpg',
-        '/thumb-jake.jpg',
-        '/thumb-entrevista.jpg',
-      ],
     },
   ];
 
@@ -359,11 +306,12 @@ function App() {
       </section>
 
       {/* Portfolio Section */}
-      {/* <section id="portfolio" className="py-20 px-4">
+      <section id="portfolio" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <h2
-            className="text-4xl font-bold mb-6 text-center"
+            className="text-4xl font-bold mb-6"
             style={{
+              textAlign: 'center',
               backgroundImage: 'linear-gradient(to right, black, black)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
@@ -372,7 +320,6 @@ function App() {
           >
             Portfólio
           </h2>
-
           <Swiper
             modules={[Navigation, Pagination, A11y]}
             spaceBetween={30}
@@ -380,13 +327,18 @@ function App() {
             navigation
             pagination={{ clickable: true }}
             breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
+              640: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
             }}
+            // className="pb-12"
           >
             {portfolioItems.map((item, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow ">
                   <Swiper
                     modules={[Autoplay, Pagination]}
                     spaceBetween={10}
@@ -397,62 +349,35 @@ function App() {
                     }}
                     pagination={{
                       clickable: true,
-                      renderBullet: (index, className) => {
-                        const isImage =
-                          item.images && index < item.images.length;
-                        const isVideo =
-                          item.videos && index >= item.images?.length;
-
-                        const bgUrl = isImage
-                          ? item.images[index]
-                          : isVideo
-                          ? '/thumb-video-placeholder.jpg'
-                          : '';
-
-                        return `<div class="${className}" style="
-                    width:40px;height:40px;
-                    background-image:url('${bgUrl}');
-                    background-size:cover;
-                    background-position:center;
-                    border-radius:4px;
-                    opacity:0.5;"></div>`;
-                      },
+                      renderBullet: (index, className) => `
+                        <div class="${className}" style="width:40px;height:40px;background-image:url(${item.images[index]});background-size:cover;   background-position: center; border-radius:4px; opacity: 0.5; 
+                          "></div>
+                        `,
                     }}
+                    // className="h-48"
                     style={{
                       height: '460px',
+
                       objectFit: 'contain',
                       overflow: 'hidden',
                     }}
                   >
-                    {item.images &&
-                      item.images.map((image, idx) => (
-                        <SwiperSlide key={`img-${idx}`}>
-                          <img
-                            src={image}
-                            alt={`${item.title} ${idx + 1}`}
-                            style={{
-                              objectFit: 'contain',
-                              width: '100%',
-                              maxHeight: '400px',
-                              height: '100%',
-                            }}
-                            className="w-full h-full object-cover"
-                          />
-                        </SwiperSlide>
-                      ))}
+                    {item.images.map((image, idx) => (
+                      <SwiperSlide key={idx}>
+                        <img
+                          src={image}
+                          style={{
+                            objectFit: 'contain',
+                            width: '100%',
+                            maxHeight: '400px',
 
-                    {item.videos &&
-                      item.videos.map((video, idx) => (
-                        <SwiperSlide key={`vid-${idx}`}>
-                          <iframe
-                            src={video}
-                            allow="autoplay"
-                            allowFullScreen
-                            title={`Vídeo ${idx + 1} do projeto`}
-                            className="w-full h-[400px] rounded-xl"
-                          ></iframe>
-                        </SwiperSlide>
-                      ))}
+                            height: '100%',
+                          }}
+                          alt={`${item.title} ${idx + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </SwiperSlide>
+                    ))}
                   </Swiper>
 
                   <div className="p-6">
@@ -462,121 +387,6 @@ function App() {
                 </div>
               </SwiperSlide>
             ))}
-          </Swiper>
-        </div>
-      </section> */}
-      <section id="portfolio" className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h2
-            className="text-4xl font-bold mb-6 text-center"
-            style={{
-              backgroundImage: 'linear-gradient(to right, black, black)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            Portfólio
-          </h2>
-
-          <Swiper
-            modules={[Navigation, Pagination, A11y]}
-            spaceBetween={30}
-            slidesPerView={1}
-            navigation
-            pagination={{ clickable: true }}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            {portfolioItems.map((item, index) => {
-              // Tipagem correta do conteúdo da galeria
-              type GalleryItem = {
-                type: 'image' | 'video';
-                src: string;
-                thumb?: string;
-              };
-
-              const galleryItems: GalleryItem[] = [
-                ...(item.images?.map((img: string) => ({
-                  type: 'image' as const,
-                  src: img,
-                })) || []),
-                ...(item.videos?.map((vid: string, i: number) => ({
-                  type: 'video' as const,
-                  src: vid,
-                  thumb: item.videoThumbs?.[i],
-                })) || []),
-              ];
-
-              return (
-                <SwiperSlide key={index}>
-                  <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                    <Swiper
-                      modules={[Autoplay, Pagination]}
-                      spaceBetween={10}
-                      slidesPerView={1}
-                      autoplay={{
-                        delay: 3000,
-                        disableOnInteraction: true,
-                      }}
-                      pagination={{
-                        clickable: true,
-                        renderBullet: (i, className) => {
-                          const item = galleryItems[i];
-                          const thumb =
-                            item.type === 'image'
-                              ? item.src
-                              : item.thumb || '/thumb-video-placeholder.jpg';
-
-                          return `<div class="${className}" style="
-                      width: 40px;
-                      height: 40px;
-                      background-image: url('${thumb}');
-                      background-size: cover;
-                      background-position: center;
-                      border-radius: 4px;
-                      opacity: 0.5;"></div>`;
-                        },
-                      }}
-                      style={{
-                        height: '460px',
-                        objectFit: 'contain',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      {galleryItems.map((media, idx) => (
-                        <SwiperSlide key={idx}>
-                          {media.type === 'image' ? (
-                            <img
-                              src={media.src}
-                              alt={`${item.title} ${idx + 1}`}
-                              className="w-full h-full object-cover max-h-[400px]"
-                            />
-                          ) : (
-                            <iframe
-                              src={media.src}
-                              allow="autoplay"
-                              allowFullScreen
-                              title={`Vídeo ${idx + 1} do projeto`}
-                              className="w-full h-[400px] rounded-xl"
-                            ></iframe>
-                          )}
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold mb-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-gray-600">{item.description}</p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              );
-            })}
           </Swiper>
         </div>
       </section>
@@ -678,10 +488,20 @@ function App() {
       <section id="contact" className="py-20 px-4 bg-black">
         {/* Fundo preto */}
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-bold mb-6 text-center text-white">
+          <h2
+            className="text-5xl font-bold mb-6 text-center text-white"
+            // style={{
+            //   backgroundImage:
+            //     'linear-gradient(to right, #F48FB1, #C026D3, #7C1442)',
+            //   backgroundClip: 'text',
+            //   WebkitBackgroundClip: 'text',
+            //   WebkitTextFillColor: 'transparent',
+            // }}
+          >
             Contato
           </h2>
           <div className="grid md:grid-cols-2 gap-12 mx-auto">
+            {/* Adicionado mx-auto para centralizar */}
             <div>
               <form className="space-y-6">
                 <div>
