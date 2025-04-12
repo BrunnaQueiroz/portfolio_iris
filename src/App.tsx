@@ -1,3 +1,4 @@
+import ReactPlayer from 'react-player';
 import React from 'react';
 
 import {
@@ -12,41 +13,12 @@ import {
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination, A11y } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // const portfolioItems = [
-  //   {
-  //     images: ['/capa-valentine.jpg', '/perfil-valentine.jpg'],
-  //     title: 'Vallenttine Modas',
-  //     description:
-  //       'Desenvolvimento do Instagram do zero, incluindo design, criação de conteúdo e estratégias para atrair e engajar clientes no segmento de moda feminina',
-  //   },
-  //   {
-  //     images: ['capa-seleta.jpg', 'perfil-seleta.jpg'],
-  //     title: 'Seleta Delicatessen',
-  //     description:
-  //       'Gestão de tráfego pago, design e estratégias para aumentar a conversão e consolidar a marca no nicho de alimentação saudável.',
-  //   },
-  //   {
-  //     images: ['capa-jack.jpg', 'perfil-jack.jpg'],
-  //     title: 'Jackpoint Pizzaria',
-  //     description:
-  //       'Criação de conteúdo, design e estratégias para fortalecer a presença digital e impulsionar as vendas no delivery.',
-  //   },
-  //   {
-  //     images: ['capa-salao.jpg'],
-  //     title: 'Studio de beleza',
-  //     description: 'Campanha com micro-influenciadores gerando 300% de ROI.',
-  //   },
-  //   {
-  //     images: ['capa-nossoEngenho.jpg'],
-  //     title: 'Nosso engenho',
-  //     description:
-  //       'Edição de entrevistas e vídeos para a página e atuação como repórter em cobertura do bloco Jake carnaval',
-  //   },
-  // ];
 
   const portfolioItems = [
     {
@@ -56,19 +28,19 @@ function App() {
         'Desenvolvimento do Instagram do zero, incluindo design, criação de conteúdo e estratégias para atrair e engajar clientes no segmento de moda feminina',
     },
     {
-      images: ['capa-seleta.jpg', 'perfil-seleta.jpg'],
+      images: ['/capa-seleta.jpg', '/perfil-seleta.jpg'],
       title: 'Seleta Delicatessen',
       description:
         'Gestão de tráfego pago, design e estratégias para aumentar a conversão e consolidar a marca no nicho de alimentação saudável.',
     },
     {
-      images: ['capa-jack.jpg', 'perfil-jack.jpg'],
+      images: ['/capa-jack.jpg', '/perfil-jack.jpg'],
       title: 'Jackpoint Pizzaria',
       description:
         'Criação de conteúdo, design e estratégias para fortalecer a presença digital e impulsionar as vendas no delivery.',
     },
     {
-      images: ['capa-salao.jpg'],
+      images: ['/capa-salao.jpg'],
       title: 'Studio de beleza',
       description: 'Campanha com micro-influenciadores gerando 300% de ROI.',
       videos: [
@@ -83,19 +55,18 @@ function App() {
       ],
     },
     {
-      images: ['capa-nossoEngenho.jpg'],
       title: 'Nosso engenho',
       description:
-        'Edição de entrevistas e vídeos para a página e atuação como repórter em cobertura do bloco Jake carnaval',
+        'Edição de entrevistas e vídeos para a página e atuação como repórter em cobertura do bloco Jake carnaval',
       videos: [
         'https://drive.google.com/file/d/16V94Ce4wbnTWkl_kdtCMnQ2JYuklAnFI/preview',
-        'https://drive.google.com/file/d/16V94Ce4wbnTWkl_kdtCMnQ2JYuklAnFI/preview',
+        'https://drive.google.com/file/d/16RCo9JP0hHqMnQEkKEBAne-eKvYh76z8/view?usp=drivesdk ',
         'https://drive.google.com/file/d/17lPUwPxzSUXzbutGAT7mUI5xvb-vtRhf/preview',
       ],
       videoThumbs: [
-        '/thumb-restaurante.jpg',
-        '/thumb-jake.jpg',
         '/thumb-entrevista.jpg',
+        '/thumb-jake.jpg',
+        '/thumb-restaurante.jpg',
       ],
     },
   ];
@@ -122,6 +93,34 @@ function App() {
       role: 'CMO, Tech Solutions',
     },
   ];
+
+  const [enviado, setEnviado] = useState(false);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    fetch('https://formsubmit.co/ajax/irisalvesba12@hotmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value,
+      }),
+    })
+      .then(res => {
+        if (res.ok) {
+          setEnviado(true);
+          form.reset();
+        }
+      })
+      .catch(err => console.log(err));
+  };
 
   return (
     <div className="min-h-screen ">
@@ -222,18 +221,15 @@ function App() {
           </div>
         )}
       </nav>
-
       {/* Hero Section */}
       <section
         className="pt-32 pb-20 px-4 bg-gradient-to-b from-violet-50 to-white"
         style={{
           backgroundImage: 'url("/bg.jpg")',
-          // backgroundImage: 'url("/bg-iris.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           width: '100%',
-          // height: '100vh', // Remova esta linha
         }}
       >
         <section className="pb-5 relative flex items-center justify-center h-[80vh]">
@@ -250,7 +246,6 @@ function App() {
               <span
                 style={{
                   backgroundImage: 'linear-gradient(to right,  black, black)',
-
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
@@ -298,7 +293,6 @@ function App() {
               style={{
                 width: '100%',
                 maxWidth: '400px',
-
                 margin: 'auto',
                 padding: '10px',
                 boxSizing: 'border-box',
@@ -338,7 +332,6 @@ function App() {
                   target="_blank"
                   title="Instagram"
                   rel="noopener noreferrer"
-                  // className="text-violet-600 hover:text-violet-800"
                   className="text-white hover:text-black"
                 >
                   <Instagram size={24} />
@@ -359,112 +352,7 @@ function App() {
       </section>
 
       {/* Portfolio Section */}
-      {/* <section id="portfolio" className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h2
-            className="text-4xl font-bold mb-6 text-center"
-            style={{
-              backgroundImage: 'linear-gradient(to right, black, black)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            Portfólio
-          </h2>
 
-          <Swiper
-            modules={[Navigation, Pagination, A11y]}
-            spaceBetween={30}
-            slidesPerView={1}
-            navigation
-            pagination={{ clickable: true }}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            {portfolioItems.map((item, index) => (
-              <SwiperSlide key={index}>
-                <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <Swiper
-                    modules={[Autoplay, Pagination]}
-                    spaceBetween={10}
-                    slidesPerView={1}
-                    autoplay={{
-                      delay: 3000,
-                      disableOnInteraction: true,
-                    }}
-                    pagination={{
-                      clickable: true,
-                      renderBullet: (index, className) => {
-                        const isImage =
-                          item.images && index < item.images.length;
-                        const isVideo =
-                          item.videos && index >= item.images?.length;
-
-                        const bgUrl = isImage
-                          ? item.images[index]
-                          : isVideo
-                          ? '/thumb-video-placeholder.jpg'
-                          : '';
-
-                        return `<div class="${className}" style="
-                    width:40px;height:40px;
-                    background-image:url('${bgUrl}');
-                    background-size:cover;
-                    background-position:center;
-                    border-radius:4px;
-                    opacity:0.5;"></div>`;
-                      },
-                    }}
-                    style={{
-                      height: '460px',
-                      objectFit: 'contain',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {item.images &&
-                      item.images.map((image, idx) => (
-                        <SwiperSlide key={`img-${idx}`}>
-                          <img
-                            src={image}
-                            alt={`${item.title} ${idx + 1}`}
-                            style={{
-                              objectFit: 'contain',
-                              width: '100%',
-                              maxHeight: '400px',
-                              height: '100%',
-                            }}
-                            className="w-full h-full object-cover"
-                          />
-                        </SwiperSlide>
-                      ))}
-
-                    {item.videos &&
-                      item.videos.map((video, idx) => (
-                        <SwiperSlide key={`vid-${idx}`}>
-                          <iframe
-                            src={video}
-                            allow="autoplay"
-                            allowFullScreen
-                            title={`Vídeo ${idx + 1} do projeto`}
-                            className="w-full h-[400px] rounded-xl"
-                          ></iframe>
-                        </SwiperSlide>
-                      ))}
-                  </Swiper>
-
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                    <p className="text-gray-600">{item.description}</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section> */}
       <section id="portfolio" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <h2
@@ -491,24 +379,25 @@ function App() {
             }}
           >
             {portfolioItems.map((item, index) => {
-              // Tipagem correta do conteúdo da galeria
-              type GalleryItem = {
-                type: 'image' | 'video';
-                src: string;
-                thumb?: string;
-              };
+              const [activeVideoIndex, setActiveVideoIndex] = useState<
+                number | null
+              >(null);
 
-              const galleryItems: GalleryItem[] = [
-                ...(item.images?.map((img: string) => ({
-                  type: 'image' as const,
+              const imageSlides =
+                item.images?.map((img: string) => ({
+                  type: 'image',
                   src: img,
-                })) || []),
-                ...(item.videos?.map((vid: string, i: number) => ({
-                  type: 'video' as const,
+                })) || [];
+
+              const videoSlides =
+                item.videos?.map((vid: string, i: number) => ({
+                  type: 'video',
                   src: vid,
-                  thumb: item.videoThumbs?.[i],
-                })) || []),
-              ];
+                  thumb:
+                    item.videoThumbs?.[i] || '/thumb-video-placeholder.jpg',
+                })) || [];
+
+              const galleryItems = [...imageSlides, ...videoSlides];
 
               return (
                 <SwiperSlide key={index}>
@@ -517,32 +406,28 @@ function App() {
                       modules={[Autoplay, Pagination]}
                       spaceBetween={10}
                       slidesPerView={1}
-                      autoplay={{
-                        delay: 3000,
-                        disableOnInteraction: true,
-                      }}
+                      // autoplay={{
+                      //   delay: 3000,
+                      //   disableOnInteraction: true,
+                      // }}
                       pagination={{
                         clickable: true,
                         renderBullet: (i, className) => {
                           const item = galleryItems[i];
                           const thumb =
-                            item.type === 'image'
-                              ? item.src
-                              : item.thumb || '/thumb-video-placeholder.jpg';
-
+                            item.type === 'image' ? item.src : item.thumb;
                           return `<div class="${className}" style="
-                      width: 40px;
-                      height: 40px;
-                      background-image: url('${thumb}');
-                      background-size: cover;
-                      background-position: center;
-                      border-radius: 4px;
-                      opacity: 0.5;"></div>`;
+                          width: 40px;
+                          height: 40px;
+                          background-image: url('${thumb}');
+                          background-size: cover;
+                          background-position: center;
+                          border-radius: 4px;
+                          opacity: 0.5;"></div>`;
                         },
                       }}
                       style={{
                         height: '460px',
-                        objectFit: 'contain',
                         overflow: 'hidden',
                       }}
                     >
@@ -551,17 +436,44 @@ function App() {
                           {media.type === 'image' ? (
                             <img
                               src={media.src}
-                              alt={`${item.title} ${idx + 1}`}
-                              className="w-full h-full object-cover max-h-[400px]"
+                              alt={`Imagem ${idx + 1}`}
+                              className="w-full h-full object-contain  max-h-[400px]"
                             />
-                          ) : (
+                          ) : activeVideoIndex === idx ? (
                             <iframe
-                              src={media.src}
+                              src={media.src.replace('/view', '/preview')}
                               allow="autoplay"
                               allowFullScreen
-                              title={`Vídeo ${idx + 1} do projeto`}
+                              title={`Vídeo ${idx + 1}`}
                               className="w-full h-[400px] rounded-xl"
                             ></iframe>
+                          ) : (
+                            <div
+                              className="relative w-full h-[400px] cursor-pointer"
+                              onClick={() => setActiveVideoIndex(idx)}
+                            >
+                              <img
+                                src={media.thumb}
+                                alt={`Thumb vídeo ${idx + 1}`}
+                                className="w-full h-full object-cover rounded-xl"
+                              />
+                              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-16 w-16 text-white opacity-90"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={1.5}
+                                    d="M14.752 11.168l-4.197-2.4A1 1 0 009 9.6v4.8a1 1 0 001.555.832l4.197-2.4a1 1 0 000-1.664z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
                           )}
                         </SwiperSlide>
                       ))}
@@ -581,70 +493,20 @@ function App() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section
-        id="services"
-        className="py-20 px-4 bg-gradient-to-r to-black from-pink-600"
-      >
-        <div className="max-w-7xl mx-auto ">
-          <h2
-            className="text-4xl font-bold mb-6 text-white"
-            style={{
-              textAlign: 'center',
-              // backgroundImage: 'linear-gradient(to right, #C026D3, #7C3AED)',
-              // backgroundClip: 'text',
-              // WebkitBackgroundClip: 'text',
-              // WebkitTextFillColor: 'transparent',
-            }}
-          >
-            Serviços
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold mb-4">
-                Gestão de Redes Sociais
-              </h3>
-              <p className="text-gray-600">
-                Criação e gerenciamento de conteúdo para suas redes sociais,
-                incluindo estratégia, calendário editorial e análise de
-                métricas.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold mb-4">Produção de Vídeos</h3>
-              <p className="text-gray-600">
-                Criação de conteúdo em vídeo para redes sociais, incluindo
-                edição, motion graphics e finalização.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold mb-4">
-                Consultoria Digital
-              </h3>
-              <p className="text-gray-600">
-                Análise e planejamento estratégico para sua presença digital,
-                com foco em resultados.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 px-4 bg-violet-50">
+      {/* <section id="portfolio" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <h2
-            className="text-4xl font-bold mb-6 text-black"
+            className="text-4xl font-bold mb-6 text-center"
             style={{
-              textAlign: 'center',
-              // backgroundImage: 'linear-gradient(to right, #C026D3, #7C3AED)',
-              // backgroundClip: 'text',
-              // WebkitBackgroundClip: 'text',
-              // WebkitTextFillColor: 'transparent',
+              backgroundImage: 'linear-gradient(to right, black, black)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
             }}
           >
-            Depoimentos
+            Portfólio
           </h2>
+
           <Swiper
             modules={[Navigation, Pagination, A11y]}
             spaceBetween={30}
@@ -652,21 +514,218 @@ function App() {
             navigation
             pagination={{ clickable: true }}
             breakpoints={{
-              640: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
             }}
-            className="pb-12"
+          >
+            {portfolioItems.map((item, index) => {
+              const [activeVideoIndex, setActiveVideoIndex] = useState<
+                number | null
+              >(null);
+
+              const imageSlides =
+                item.images?.map((img: string) => ({
+                  type: 'image',
+                  src: img,
+                })) || [];
+
+              const videoSlides =
+                item.videos?.map((vid: string, i: number) => ({
+                  type: 'video',
+                  src: vid,
+                  thumb:
+                    item.videoThumbs?.[i] || '/thumb-video-placeholder.jpg',
+                })) || [];
+
+              const galleryItems = [...imageSlides, ...videoSlides];
+
+              return (
+                <SwiperSlide key={index}>
+                  <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                    <Swiper
+                      modules={[Autoplay, Pagination]}
+                      spaceBetween={10}
+                      slidesPerView={1}
+                      pagination={{
+                        clickable: true,
+                        renderBullet: (i, className) => {
+                          const item = galleryItems[i];
+                          const thumb =
+                            item.type === 'image' ? item.src : item.thumb;
+                          return `<div class="${className}" style="
+                          width: 40px;
+                          height: 40px;
+                          background-image: url('${thumb}');
+                          background-size: cover;
+                          background-position: center;
+                          border-radius: 4px;
+                          opacity: 0.5;"></div>`;
+                        },
+                      }}
+                      style={{ height: '460px', overflow: 'hidden' }}
+                    >
+                      {galleryItems.map((media, idx) => (
+                        <SwiperSlide key={idx}>
+                          {media.type === 'image' ? (
+                            <img
+                              src={media.src}
+                              alt={`Imagem ${idx + 1}`}
+                              className="w-full h-full object-contain max-h-[400px]"
+                            />
+                          ) : activeVideoIndex === idx ? (
+                            // <iframe
+                            //   src={media.src.replace('/view', '/preview')}
+                            //   allow="autoplay"
+                            //   allowFullScreen
+                            //   title={`Vídeo ${idx + 1}`}
+                            //   className="w-full h-[400px] rounded-xl"
+                            // ></iframe>
+                            <iframe
+                              src={`${media.src.replace(
+                                '/view',
+                                '/preview'
+                              )}?autoplay=1`}
+                              allow="autoplay"
+                              allowFullScreen
+                              title={`Vídeo ${idx + 1}`}
+                              className="w-full h-[400px] rounded-xl"
+                            />
+                          ) : (
+                            <div
+                              className="relative w-full h-[400px] cursor-pointer"
+                              onClick={() => setActiveVideoIndex(idx)}
+                            >
+                              <img
+                                src={media.thumb}
+                                alt={`Thumb vídeo ${idx + 1}`}
+                                className="w-full h-full object-cover rounded-xl"
+                              />
+                              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-16 w-16 text-white opacity-90"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={1.5}
+                                    d="M14.752 11.168l-4.197-2.4A1 1 0 009 9.6v4.8a1 1 0 001.555.832l4.197-2.4a1 1 0 000-1.664z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
+                          )}
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-600">{item.description}</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+      </section> */}
+
+      {/* Services Section */}
+      <section
+        id="services"
+        className="py-20 px-4 bg-gradient-to-r from-pink-600 to-black"
+      >
+        <div className="max-w-7xl mx-auto">
+          <h2
+            className="text-4xl font-bold mb-6 text-center text-white"
+            style={{}}
+          >
+            Serviços
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow">
+              <h3 className="text-2xl font-semibold mb-4">Social Media</h3>
+              <p className="text-gray-700">
+                Planejamento, estratégia e gestão de redes sociais voltadas para
+                marcas que desejam se destacar no digital. Criação de conteúdo
+                personalizado, legendas estratégicas, identidade visual alinhada
+                ao posicionamento da marca e análise de métricas para tomada de
+                decisões.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow">
+              <h3 className="text-2xl font-semibold mb-4">Edição de Vídeo</h3>
+              <p className="text-gray-700">
+                Edição criativa e dinâmica de vídeos para reels, stories,
+                YouTube ou outros formatos. Cortes precisos, ajustes de cor,
+                inserção de trilha sonora, transições suaves, legendas, efeitos
+                visuais e montagem com foco em impacto visual e engajamento.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow">
+              <h3 className="text-2xl font-semibold mb-4">
+                Produção de Vídeo (Mobile)
+              </h3>
+              <p className="text-gray-700">
+                Captação de vídeo com celular de forma profissional, usando
+                enquadramento, iluminação e direção adequadas para criar
+                conteúdo autêntico e de qualidade. Gravações para bastidores,
+                apresentação de produtos, depoimentos, vídeos institucionais
+                ou promocionais.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-20 px-4 bg-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <h2
+            className="text-4xl font-bold mb-6 text-center"
+            style={{
+              backgroundImage: 'linear-gradient(to right, black, black)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Depoimentos
+          </h2>
+          <Swiper
+            modules={[Autoplay, Pagination, Navigation]}
+            spaceBetween={30}
+            slidesPerView={1}
+            // autoplay={{ delay: 5000, disableOnInteraction: true }}
+            pagination={{ clickable: true }}
+            navigation
+            breakpoints={{
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
           >
             {testimonials.map((testimonial, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-white p-8 rounded-lg shadow-lg h-full">
-                  <p className="text-gray-600 mb-4">"{testimonial.text}"</p>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-gray-500">{testimonial.role}</p>
+                <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
+                  <p className="text-gray-700 italic mb-4">
+                    "{testimonial.text}"
+                  </p>
+                  <div className="flex items-center">
+                    <div className="ml-4">
+                      <p className="text-gray-900 font-semibold">
+                        {testimonial.author}
+                      </p>
+                      <p className="text-gray-600">{testimonial.role}</p>
+                    </div>
+                  </div>
                 </div>
               </SwiperSlide>
             ))}
@@ -675,97 +734,246 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 bg-black">
-        {/* Fundo preto */}
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-bold mb-6 text-center text-white">
-            Contato
-          </h2>
-          <div className="grid md:grid-cols-2 gap-12 mx-auto">
-            <div>
-              <form className="space-y-6">
+      <section
+        id="contact"
+        className="pt-8 bg-gradient-to-r from-black to-pink-600"
+      >
+        {/* <div className="grid md:grid-cols-2 gap-8 items-start">
+          
+          <div className="text-gray-200 space-y-6">
+            <p className="text-lg leading-relaxed">
+              Se você está pronto para elevar sua marca e criar conteúdo digital
+              impactante, entre em contato comigo. Estou ansiosa para ouvir
+              sobre seu projeto e como posso ajudar!
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <Mail className="text-pink-500" size={22} />
+                <a
+                  href="mailto:contato@irisalves.com"
+                  className="hover:text-white transition-colors"
+                >
+                  contato@irisalves.com
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <MessageCircle className="text-pink-500" size={22} />
+                <a
+                  href="https://wa.me/5571986101016?text=Ol%C3%A1%2C%20%C3%8Dris!%20Gostaria%20de%20saber%20mais%20sobre%20os%20seus%20servi%C3%A7os."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="WhatsApp"
+                  className="hover:text-white transition-colors"
+                >
+                  (71) 98610-1016
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Instagram className="text-pink-500" size={22} />
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Instagram"
+                  className="hover:text-white transition-colors"
+                >
+                  @irisalves
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Linkedin className="text-pink-500" size={22} />
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="LinkedIn"
+                  className="hover:text-white transition-colors"
+                >
+                  Íris Alves
+                </a>
+              </div>
+            </div>
+          </div>
+
+          
+          <div className="bg-white rounded-xl p-8 shadow-2xl max-w-md w-full">
+            <h3 className="text-3xl font-semibold mb-6 text-gray-800">
+              Envie uma Mensagem
+            </h3>
+            <form className="space-y-5">
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Nome
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Seu Nome"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-pink-600"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Seu Email"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-pink-600"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Mensagem
+                </label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  placeholder="Sua Mensagem"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-pink-600 resize-none"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out"
+              >
+                Enviar
+              </button>
+            </form>
+          </div>
+        </div> */}
+        <h2 className="text-5xl font-bold text-center text-white mb-12">
+          Contato
+        </h2>
+        <div className="w-full flex justify-center px-4">
+          <div className="max-w-[1280px] w-full grid md:grid-cols-2 gap-8 items-start py-16">
+            {/* Formulário */}
+
+            <div className="bg-white rounded-xl p-8 shadow-2xl max-w-md w-full">
+              <h3 className="text-3xl font-semibold mb-6 text-gray-800">
+                Envie uma Mensagem
+              </h3>
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div>
-                  <label htmlFor="name" className="block text-gray-300 mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Nome
                   </label>
                   <input
                     type="text"
                     id="name"
-                    className="w-full px-4 py-2 bg-gray-800 text-white border border-pink-500 rounded-xl focus:ring-pink-500 focus:border-pink-500 shadow-sm"
+                    name="name"
+                    required
+                    placeholder="Seu Nome"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-pink-600"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-gray-300 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Email
                   </label>
                   <input
                     type="email"
                     id="email"
-                    className="w-full px-4 py-2 bg-gray-800 text-white border border-pink-500 rounded-xl focus:ring-pink-500 focus:border-pink-500 shadow-sm"
+                    name="email"
+                    required
+                    placeholder="Seu Email"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-pink-600"
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-gray-300 mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Mensagem
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     rows={4}
-                    className="w-full px-4 py-2 bg-gray-800 text-white border border-pink-500 rounded-xl focus:ring-pink-500 focus:border-pink-500 shadow-sm"
-                  ></textarea>
+                    required
+                    placeholder="Sua Mensagem"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-pink-600 resize-none"
+                  />
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-xl shadow-md transition-colors bg-gradient-to-r from-pink-500 to-black to-pink-700 text-white hover:from-pink-600 hover:to-gray-900 hover:to-pink-800"
+                  className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out"
                 >
-                  Enviar Mensagem
+                  Enviar
                 </button>
+                {enviado && (
+                  <p className="text-green-600 text-sm font-medium mt-2">
+                    E-mail enviado com sucesso!
+                  </p>
+                )}
               </form>
             </div>
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-white">
-                  Informações de Contato
-                </h3>
-                <div className="space-y-4">
+            {/* Lado esquerdo */}
+            <div className="text-gray-200">
+              <p className="text-xl leading-relaxed text-justify max-w-[600px] mb-8">
+                Se você está pronto para elevar sua marca e criar conteúdo
+                digital impactante, entre em contato comigo. Estou ansiosa para
+                ouvir sobre seu projeto e como posso ajudar!
+              </p>
+
+              <div className="space-y-5">
+                <div className="flex items-center gap-3">
+                  <Mail className="text-white" size={22} />
                   <a
                     href="mailto:contato@irisalves.com"
-                    className="flex items-center text-gray-300 hover:text-pink-500"
+                    className="text-gray-200 hover:text-white transition"
                   >
-                    <Mail className="mr-2" size={20} />
                     contato@irisalves.com
                   </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <MessageCircle className="text-white" size={22} />
                   <a
-                    href="https://calendly.com"
+                    href="https://wa.me/5571986101016?text=Ol%C3%A1%2C%20%C3%8Dris!%20Gostaria%20de%20saber%20mais%20sobre%20os%20seus%20servi%C3%A7os."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center text-gray-300 hover:text-pink-500"
+                    className="text-gray-200 hover:text-white transition"
                   >
-                    <Calendar className="mr-2" size={20} />
-                    Agendar Reunião
+                    (71) 98610-1016
                   </a>
                 </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-white">
-                  Redes Sociais
-                </h3>
-                <div className="flex space-x-4">
+                <div className="flex items-center gap-3">
+                  <Instagram className="text-white" size={22} />
                   <a
                     href="https://instagram.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-pink-500 hover:text-pink-300"
+                    className="text-gray-200 hover:text-white transition"
                   >
-                    <Instagram size={24} />
+                    @irisalves
                   </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Linkedin className="text-white" size={22} />
                   <a
                     href="https://linkedin.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-pink-500 hover:text-pink-300"
+                    className="text-gray-200 hover:text-white transition"
                   >
-                    <Linkedin size={24} />
+                    Íris Alves
                   </a>
                 </div>
               </div>
@@ -775,10 +983,16 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="text-white py-8 text-center bg-gradient-to-t from-black to-pink-600">
-        <div className="max-w-7xl mx-auto px-4">
-          <p>&copy; 2024 Íris Alves. Todos os direitos reservados.</p>
-        </div>
+      <footer className="py-10 px-6 bg-white text-black flex flex-col items-center gap-4">
+        <img
+          src="/iris_logo.png"
+          alt="Logo Íris Alves"
+          className="w-32 sm:w-40 object-contain"
+        />
+        <p className="text-sm text-center text-gray-600">
+          &copy; 2024 <span className="font-medium">Íris Alves</span>. Todos os
+          direitos reservados.
+        </p>
       </footer>
     </div>
   );
